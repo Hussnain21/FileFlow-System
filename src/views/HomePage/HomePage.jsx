@@ -1,7 +1,7 @@
 import React from "react";
 import {NavComponent} from "../../components/HomePageComp";
 
-export const HomePage = () => {
+const HomePage = () => {
     return (
         <>
             <NavComponent />
@@ -10,3 +10,5 @@ export const HomePage = () => {
         </>
     );
 };
+
+export default HomePage;

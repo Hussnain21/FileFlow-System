@@ -1,9 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 
 import './App.css'
-import { HomePage } from './views/HomePage/HomePage';
-import Login from "./views/AuthViews/Login/Login";
-import Register from "./views/AuthViews/Register/Register";
+
+import { HomePage, Login, Register, DashboardPage } from "./views";
 
 const App = () => {
 
@@ -13,6 +12,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
          </Routes>
       </div>
   );
