@@ -53,17 +53,20 @@ export const signUpUser = (name, email, password, setSuccess) => (dispatch) => {
 };
 
 export const SignOutUser = () => (dispatch) => {
-    dispatch(logOutUser());
+    fb.auth().signOut().then(() => {
+        dispatch(logOutUser());
+    });
 };
 
-export const checkIsLoggedIn = () => dispatch => {
-    fb.auth().onAuthStateChanged(user => {
+export const checkIsLoggedIn = () => (dispatch) => {
+    fb.auth().onAuthStateChanged((user) => {
         if(user) {
             dispatch(loginUser({
                 uid: user.uid,
                 email: user.email,
-                displayName: user.displyName,
-            }))
+                displayName: user.displayName,
+            })
+            );
         }
-    })
-}
+    });
+};
