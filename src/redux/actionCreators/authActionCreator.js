@@ -16,13 +16,13 @@ const logOutUser = () => {
 };
 
 
-export const signInUser = (email, password) => (dispatch) => {
+export const signInUser = (email, password, setSuccess) => (dispatch) => {
     fb.auth().signInWithEmailAndPassword(email, password).then(user=>{
         dispatch(loginUser({uid: user.user.uid, email: user.user.email, displayName: user.user.displayName}));
         setSuccess(true);
     }).catch(error=>{
         alert("Invalid Email or Password!");
-    })
+    });
 };
 
 export const signUpUser = (name, email, password, setSuccess) => (dispatch) => {
@@ -54,4 +54,16 @@ export const signUpUser = (name, email, password, setSuccess) => (dispatch) => {
 
 export const SignOutUser = () => (dispatch) => {
     dispatch(logOutUser());
-} 
+};
+
+export const checkIsLoggedIn = () => dispatch => {
+    fb.auth().onAuthStateChanged(user => {
+        if(user) {
+            dispatch(loginUser({
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displyName,
+            }))
+        }
+    })
+}

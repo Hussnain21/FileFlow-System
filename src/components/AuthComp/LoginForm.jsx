@@ -26,7 +26,7 @@ const LoginForm = () => {
         if (success) {
             navigate("/dashboard");
         }
-    },[success]);
+    },[success])
 
     return (
         <form onSubmit={handleSubmit}>
