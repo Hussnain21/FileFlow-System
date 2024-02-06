@@ -9,7 +9,7 @@ const NavComponent = () => {
     const dispatch = useDispatch();
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <Link className="navbar-brand ms-5" to="/"> FileFLow System</Link>
 
         <ul className="navbar-nav ms-auto me-5">
@@ -22,12 +22,12 @@ const NavComponent = () => {
             </p>
             </li>  
                 <li className="nav-item mx-2">
-            <Link className="btn btn-primary btn-sm" to="/dashboard">
+            <Link className="btn btn-dark btn-sm" to="/dashboard">
                 Dashboard
             </Link>
            </li>
            <li className="nav-item">
-            <button className="btn btn-success btn-sm" onClick={() => dispatch(SignOutUser())}>
+            <button className="btn btn-dark btn-sm" onClick={() => dispatch(SignOutUser())}>
                 Logout
             </button>
            </li>
@@ -35,13 +35,13 @@ const NavComponent = () => {
               )  : (
                <>
                 <li className="nav-item mx-2">
-            <Link className="btn btn-primary btn-sm" to="/login">
+            <Link className="btn btn-dark btn-sm" to="/login">
                 Login
             </Link>
            </li>
 
            <li className="nav-item">
-            <Link className="btn btn-success btn-sm" to="/register">
+            <Link className="btn btn-dark btn-sm" to="/register">
                 Register here
             </Link>
            </li>
