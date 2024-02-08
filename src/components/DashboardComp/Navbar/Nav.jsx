@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { SignOutUser } from "../../redux/actionCreators/authActionCreator";
+import { SignOutUser } from "../../../redux/actionCreators/authActionCreator";
 
-const NavComponent = () => {
+const Nav = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <Link className="navbar-brand ms-5" to="/">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
+      <Link className="navbar-brand ms-5" to="/dasboard">
         FileFLow System
       </Link>
 
@@ -17,19 +17,19 @@ const NavComponent = () => {
         {isAuthenticated ? (
           <>
             <li className="nav-item mx-2">
-              <p className="my-0 mt-1">
-                <span className="text-light"> Welcome: </span>
-                <span className="text-warning">{user.displayName}</span>
+              <p className="my-0 mt-2 mx-2">
+                <span className="text-dark"> Welcome: </span>
+                <span className="fw-bold">{user.displayName}</span>
               </p>
             </li>
             <li className="nav-item mx-2">
-              <Link className="btn btn-dark btn-sm" to="/dashboard">
-                Dashboard
+              <Link className="btn btn-dark" to="/">
+                Home
               </Link>
             </li>
             <li className="nav-item">
               <button
-                className="btn btn-dark btn-sm"
+                className="btn btn-dark"
                 onClick={() => dispatch(SignOutUser())}
               >
                 Logout
@@ -56,4 +56,4 @@ const NavComponent = () => {
   );
 };
 
-export default NavComponent;
+export default Nav;
