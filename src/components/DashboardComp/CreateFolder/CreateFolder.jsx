@@ -2,7 +2,7 @@ import { faL, faTimes, fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-const CreateFolder = ({ setIsCreatedFolderModalOpen }) => {
+const CreateFolder = ({ setIsCreateFolderModalOpen }) => {
   return (
     <div
       className="col-md-12 position-fixed top-0 left-0 w-100 h-100"
@@ -14,7 +14,7 @@ const CreateFolder = ({ setIsCreatedFolderModalOpen }) => {
             <h4>Create Folder</h4>
             <button
               className="btn"
-              onClick={() => setIsCreatedFolderModalOpen(false)}
+              onClick={() => setIsCreateFolderModalOpen(false)}
             >
               <FontAwesomeIcon
                 icon={faTimes}
