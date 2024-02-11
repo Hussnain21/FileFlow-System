@@ -7,38 +7,69 @@ import { createFolder } from "../../../redux/actionCreators/elementsActionCreato
 const CreateFolder = ({ setIsCreateFolderModalOpen }) => {
   const [folderName, setFolderName] = useState("");
 
-  const { userFolders, user, selectedFolder } = useSelector(
+  const { userFolders, user, currentFolder } = useSelector(
     (state) => ({
       userFolders: state.elements.userFolders,
       user: state.auth.user,
-      selectedFolder: state.elements.selectedFolder,
+      currentFolder: state.elements.currentFolder,
     }),
     shallowEqual
   );
 
   const dispatch = useDispatch();
 
-  const checkFolderExists = (name) => {
-    const folderExists = userFolders.find((folder) => folder.name === name);
-    if (folderExists) {
-      return true;
-    } else {
-      return false;
-    }
+  const checkFolderAlreadyPresent = (name) => {
+    const firstFolderArray = userFolders[0];
+    const folderExists = firstFolderArray?.some(
+      (folder) => folder?.name?.toLowerCase() === name.toLowerCase()
+    );
+    return folderExists;
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Before check:", userFolders);
+  //   if (userFolders) {
+  //     console.log("After check:", userFolders);
+  //     if (folderName) {
+  //       if (folderName.length > 3) {
+  //         if (!checkFolderAlreadyPresent(folderName)) {
+  //           // ... rest of your code
+  //         } else {
+  //           alert("Folder already exists!");
+  //         }
+  //       } else {
+  //         alert("Folder name must contain 3 or more characters!");
+  //       }
+  //     } else {
+  //       alert("Folder name required!");
+  //     }
+  //   } else {
+  //     alert("Error: userFolders is undefined or null.");
+  //   }
+  // };
+
+  // const checkFolderAlreadyPresent = (name) => {
+  //   const folderExists = userFolders.find((folder) => folder.name == name);
+  //   if (folderExists) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (folderName) {
       if (folderName.length > 3) {
-        if (!checkFolderExists(folderName)) {
+        if (!checkFolderAlreadyPresent(folderName)) {
           const data = {
             createdAt: new Date(),
             name: folderName,
             userId: user.uid,
             createBy: user.displayName,
-            path: selectedFolder == "root" ? [] : ["parent folder path!"],
-            parent: selectedFolder,
+            path: currentFolder == "root" ? [] : ["parent folder path!"],
+            parent: currentFolder,
             lastAccessed: null,
             updatedAt: new Date(),
           };
