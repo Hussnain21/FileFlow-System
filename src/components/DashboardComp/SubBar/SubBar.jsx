@@ -6,11 +6,21 @@ import {
   faSquareCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import "./SubBar.css";
+import { Link } from "react-router-dom";
 
 const SubBar = ({ setIsCreateFolderModalOpen }) => {
   return (
     <nav className="navbar navbar-expand-lg mt-2 navbar-light bg-white py-2">
-      <p className="small ms-3 "> Root </p>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item ms-5">
+            <Link to="/dashboard">Root</Link>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            New Folder
+          </li>
+        </ol>
+      </nav>
 
       <ul className="navbar-nav ms-auto me-5">
         <li className="nav-item mx-2">
