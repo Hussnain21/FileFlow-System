@@ -24,7 +24,8 @@ export const createFolder = (data) => (dispatch) => {
     .add(data)
     .then(async (folder) => {
       const folderData = await (await folder.get()).data();
-      dispatch(addFolder(folderData));
+      const folderId = folder.id;
+      dispatch(addFolder({ data: folderData, docId: folderId }));
       alert("Folder created successfully");
     });
 };
@@ -36,7 +37,10 @@ export const getFolders = (userId) => (dispatch) => {
     .where("userId", "==", userId)
     .get()
     .then(async (folders) => {
-      const foldersData = await folders.docs.map((folder) => folder.data());
+      const foldersData = await folders.docs.map((folder) => ({
+        data: folder.data(),
+        docId: folder.id,
+      }));
       dispatch(setLoading(false));
       dispatch(addFolder(foldersData));
     });

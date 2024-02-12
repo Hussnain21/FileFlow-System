@@ -23,6 +23,7 @@ const HomePageComp = () => {
         <>
           <Elements
             title={"Created Folders"}
+            type={"folder"}
             elements={userFolders.length > 0 ? userFolders[0] : []}
           />
           <Elements title={"Created Files"} elements={files} />

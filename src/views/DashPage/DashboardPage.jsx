@@ -1,11 +1,12 @@
 import { React, useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Route, Routes } from "react-router-dom";
 import Nav from "../../components/DashboardComp/Navbar/Nav";
 import SubBar from "../../components/DashboardComp/SubBar/SubBar";
 import HomePageComp from "../../components/DashboardComp/HomePageComp/HomePageComp";
 import CreateFolder from "../../components/DashboardComp/CreateFolder/CreateFolder";
 import { getFolders } from "../../redux/actionCreators/elementsActionCreator";
+import FolderComp from "../../components/DashboardComp/FolderComp/FolderComp";
 
 const DashboardPage = () => {
   const [isCreateFolderModalOpen, setIsCreateFolderModalOpen] = useState(false);
@@ -40,7 +41,10 @@ const DashboardPage = () => {
       )}
       <Nav />
       <SubBar setIsCreateFolderModalOpen={setIsCreateFolderModalOpen} />
-      <HomePageComp />
+      <Routes>
+        <Route path="" element={<HomePageComp />} />
+        <Route path="folder/:folderId" element={<FolderComp />} />
+      </Routes>
     </>
   );
 };
