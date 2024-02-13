@@ -48,6 +48,7 @@ export const getFolders = (userId) => (dispatch) => {
       }));
       dispatch(setLoading(false));
       dispatch(addFolder(foldersData));
+      console.log(foldersData);
     });
 };
 

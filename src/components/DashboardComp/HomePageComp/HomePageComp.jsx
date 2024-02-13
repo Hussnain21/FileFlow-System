@@ -6,26 +6,18 @@ const HomePageComp = () => {
   const folders = ["New folder", "new folder 2"];
   const files = [{ name: "New file" }, { name: "new file 2" }];
 
-  const { isLoading, allUserFolders } = useSelector(
+  const { isLoading, userFolders } = useSelector(
     (state) => ({
       isLoading: state.elements.isLoading,
-      allUserFolders: state.elements.userFolders,
-      // userFolder: state.elements.userFolders.filter(
-      //   (folder) => folder.data && folder.data.parent == "root"
-      // ),
+      userFolders: state.elements.userFolders,
     }),
     shallowEqual
   );
 
-  const userFolders = useMemo(
-    () =>
-      allUserFolders.filter(
-        (folder) => folder.data && folder.data.parent === "root"
-      ),
-    [allUserFolders]
-  );
-
-  console.log("userFolders:", allUserFolders);
+  const a = userFolders[0]?.filter(
+    (folder) => folder.data && folder.data.parent === "root"
+  )[0];
+  console.log(a);
 
   return (
     <div className="col-md-12 w-100">
@@ -36,7 +28,9 @@ const HomePageComp = () => {
           <Elements
             title={"Created Folders"}
             type={"folder"}
-            elements={userFolders}
+            // elements={a}
+            // elements={a.length > 0 ? a[0] : []}
+            elements={a && a.length > 0 && a[0] && a[0].data ? [a[0].data] : []}
           />
           <Elements title={"Created Files"} elements={files} />
         </>
