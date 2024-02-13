@@ -16,7 +16,7 @@ const SubBar = ({ setIsCreateFolderModalOpen }) => {
           <li className="breadcrumb-item ms-5">
             <Link to="/dashboard">Root</Link>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             New Folder
           </li>
         </ol>

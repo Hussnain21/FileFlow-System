@@ -7,56 +7,39 @@ import { createFolder } from "../../../redux/actionCreators/elementsActionCreato
 const CreateFolder = ({ setIsCreateFolderModalOpen }) => {
   const [folderName, setFolderName] = useState("");
 
-  const { userFolders, user, currentFolder } = useSelector(
+  const { userFolders, user, currentFolder, currentFolderData } = useSelector(
     (state) => ({
       userFolders: state.elements.userFolders,
       user: state.auth.user,
       currentFolder: state.elements.currentFolder,
+      currentFolderData: state.elements.userFolders.find(
+        (folder) => folder.docId == state.elements.currentFolder
+      ),
     }),
     shallowEqual
   );
 
   const dispatch = useDispatch();
 
+  //   const firstFolderArray = userFolders[0];
+  //   const folderExists = firstFolderArray
+  //     ?.filter(
+  //       (folder) => folder?.parent?.toLowerCase() == currentFolder.toLowerCase()
+  //     )
+  //     .find((folder) => folder?.name?.toLowerCase() == name?.toLowerCase());
+  //   return folderExists;
+  // };
   const checkFolderAlreadyPresent = (name) => {
-    const firstFolderArray = userFolders[0];
-    const folderExists = firstFolderArray?.some(
-      (folder) => folder?.name?.toLowerCase() === name.toLowerCase()
-    );
-    return folderExists;
+    const folderPresent = userFolders
+      .filter((folder) => folder.data && folder.data.parent === currentFolder)
+      .find((folder) => folder.data && folder.data.name === name);
+    console.log("folderPresent:", folderPresent);
+    if (folderPresent) {
+      return true;
+    } else {
+      return false;
+    }
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Before check:", userFolders);
-  //   if (userFolders) {
-  //     console.log("After check:", userFolders);
-  //     if (folderName) {
-  //       if (folderName.length > 3) {
-  //         if (!checkFolderAlreadyPresent(folderName)) {
-  //           // ... rest of your code
-  //         } else {
-  //           alert("Folder already exists!");
-  //         }
-  //       } else {
-  //         alert("Folder name must contain 3 or more characters!");
-  //       }
-  //     } else {
-  //       alert("Folder name required!");
-  //     }
-  //   } else {
-  //     alert("Error: userFolders is undefined or null.");
-  //   }
-  // };
-
-  // const checkFolderAlreadyPresent = (name) => {
-  //   const folderExists = userFolders.find((folder) => folder.name == name);
-  //   if (folderExists) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,7 +51,10 @@ const CreateFolder = ({ setIsCreateFolderModalOpen }) => {
             name: folderName,
             userId: user.uid,
             createBy: user.displayName,
-            path: currentFolder == "root" ? [] : ["parent folder path!"],
+            path:
+              currentFolder == "root"
+                ? []
+                : [...(currentFolderData?.data.path || []), currentFolder],
             parent: currentFolder,
             lastAccessed: null,
             updatedAt: new Date(),
