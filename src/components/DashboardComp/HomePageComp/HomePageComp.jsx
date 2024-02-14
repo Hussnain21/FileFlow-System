@@ -9,15 +9,18 @@ const HomePageComp = () => {
   const { isLoading, userFolders } = useSelector(
     (state) => ({
       isLoading: state.elements.isLoading,
-      userFolders: state.elements.userFolders,
+      userFolders: state.elements.userFolders[0]?.filter(
+        (folder) => folder.data && folder.data.parent === "root"
+      ),
     }),
     shallowEqual
   );
 
-  const a = userFolders[0]?.filter(
-    (folder) => folder.data && folder.data.parent === "root"
-  )[0];
-  console.log(a);
+  // const a = userFolders[0]?.filter(
+  //   (folder) => folder.data && folder.data.parent === "root"
+  // )[0];
+  // console.log("filtered", a);
+  console.log("user:", userFolders);
 
   return (
     <div className="col-md-12 w-100">
@@ -29,8 +32,8 @@ const HomePageComp = () => {
             title={"Created Folders"}
             type={"folder"}
             // elements={a}
-            // elements={a.length > 0 ? a[0] : []}
-            elements={a && a.length > 0 && a[0] && a[0].data ? [a[0].data] : []}
+            elements={userFolders}
+            // elements={a && a.length > 0 && a[0] && a[0].data ? [a[0].data] : []}
           />
           <Elements title={"Created Files"} elements={files} />
         </>

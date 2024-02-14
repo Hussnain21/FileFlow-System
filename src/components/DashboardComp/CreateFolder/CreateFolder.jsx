@@ -13,7 +13,7 @@ const CreateFolder = ({ setIsCreateFolderModalOpen }) => {
       user: state.auth.user,
       currentFolder: state.elements.currentFolder,
       currentFolderData: state.elements.userFolders.find(
-        (folder) => folder.docId == state.elements.currentFolder
+        (folder) => folder.docId === state.elements.currentFolder
       ),
     }),
     shallowEqual
@@ -21,14 +21,6 @@ const CreateFolder = ({ setIsCreateFolderModalOpen }) => {
 
   const dispatch = useDispatch();
 
-  //   const firstFolderArray = userFolders[0];
-  //   const folderExists = firstFolderArray
-  //     ?.filter(
-  //       (folder) => folder?.parent?.toLowerCase() == currentFolder.toLowerCase()
-  //     )
-  //     .find((folder) => folder?.name?.toLowerCase() == name?.toLowerCase());
-  //   return folderExists;
-  // };
   const checkFolderAlreadyPresent = (name) => {
     const folderPresent = userFolders
       .filter((folder) => folder.data && folder.data.parent === currentFolder)
@@ -118,3 +110,12 @@ const CreateFolder = ({ setIsCreateFolderModalOpen }) => {
 };
 
 export default CreateFolder;
+
+//   const firstFolderArray = userFolders[0];
+//   const folderExists = firstFolderArray
+//     ?.filter(
+//       (folder) => folder?.parent?.toLowerCase() == currentFolder.toLowerCase()
+//     )
+//     .find((folder) => folder?.name?.toLowerCase() == name?.toLowerCase());
+//   return folderExists;
+// };

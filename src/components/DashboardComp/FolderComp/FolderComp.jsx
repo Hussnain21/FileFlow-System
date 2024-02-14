@@ -1,5 +1,6 @@
 import { shallowEqual, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Elements from "../Elements/Elements";
 
 const FolderComp = () => {
   const { folderId } = useParams();
@@ -7,8 +8,8 @@ const FolderComp = () => {
   const { currentFolderData, childFolders } = useSelector(
     (state) => ({
       currentFolderData: state.elements.userFolders,
-      childFolders: state.elements.userFolders.filter(
-        (folder) => folder.parent === folderId
+      childFolders: state.elements.userFolders[0]?.filter(
+        (folder) => folder.data && folder.data.parent === folderId
       ),
     }),
     shallowEqual
@@ -21,7 +22,6 @@ const FolderComp = () => {
   // console.log(a);
   // console.log(currentFolderData);
 
-  // Check if currentFolderData is not undefined before accessing its properties
   const folderDataExists = a !== undefined;
   const folderData = folderDataExists ? a.data : null;
 
@@ -30,7 +30,13 @@ const FolderComp = () => {
       {/* FolderComp: {folderId} {JSON.stringify(a)} */}
       {/* childFolders: {JSON.stringify(childFolders)} */}
       {childFolders.length > 0 ? (
-        <p>{JSON.stringify(childFolders)}</p>
+        <>
+          <Elements
+            title={"Created Folders"}
+            type={"folder"}
+            elements={childFolders}
+          />
+        </>
       ) : (
         <h1 className="text-center my-5">Empty Folder</h1>
       )}
