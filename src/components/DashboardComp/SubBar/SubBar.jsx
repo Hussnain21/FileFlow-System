@@ -43,7 +43,7 @@ const SubBar = ({ setIsCreateFolderModalOpen }) => {
               >
                 Root
               </button>
-              {currentFolderData?.data.path.map((folder, index) => (
+              {currentFolderData[0]?.data.path.map((folder, index) => (
                 <button
                   key={index}
                   className="breadcrumb-item btn btn-link text-decoration-none"

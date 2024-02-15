@@ -8,9 +8,15 @@ const FolderComp = () => {
   const { currentFolderData, childFolders } = useSelector(
     (state) => ({
       currentFolderData: state.elements.userFolders,
-      childFolders: state.elements.userFolders[0]?.filter(
-        (folder) => folder.data && folder.data.parent === folderId
-      ),
+      childFolders: Array.isArray(state.elements.userFolders?.[0])
+        ? state.elements.userFolders[0].filter(
+            (folder) => folder.data && folder.data.parent === folderId
+          )
+        : [],
+
+      // childFolders: state.elements.userFolders[0]?.filter(
+      //   (folder) => folder.data && folder.data.parent === folderId
+      // ),
     }),
     shallowEqual
   );
