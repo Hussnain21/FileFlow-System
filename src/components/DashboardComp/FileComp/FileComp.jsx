@@ -2,6 +2,7 @@ import Header from "./Header";
 
 import { useParams } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
+import FileEditor from "./FileEditor";
 
 const FileComp = () => {
   const { fileId } = useParams();
@@ -17,7 +18,7 @@ const FileComp = () => {
   return (
     <div>
       <Header fileName={openedFile.data.name} />
-      FileComp: {JSON.stringify(openedFile)}
+      <FileEditor fileName={openedFile.data.name} />
     </div>
   );
 };
