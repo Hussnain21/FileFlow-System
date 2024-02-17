@@ -14,7 +14,7 @@ const Elements = ({ title, elements, type }) => {
       dispatch(changeFolder(itemId));
       navigate(`/dashboard/folder/${itemId}`);
     } else {
-      alert("File Clicked");
+      navigate(`/dashboard/file/${itemId}`);
     }
   };
 

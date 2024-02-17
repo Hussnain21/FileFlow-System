@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { useNavigate, Route, Routes } from "react-router-dom";
+import { useNavigate, Route, Routes, useLocation } from "react-router-dom";
 import Nav from "../../components/DashboardComp/Navbar/Nav";
 import SubBar from "../../components/DashboardComp/SubBar/SubBar";
 import HomePageComp from "../../components/DashboardComp/HomePageComp/HomePageComp";
@@ -11,10 +11,14 @@ import {
 } from "../../redux/actionCreators/elementsActionCreator";
 import FolderComp from "../../components/DashboardComp/FolderComp/FolderComp";
 import CreateFile from "../../components/DashboardComp/CreateFile/CreateFile";
+import FileComp from "../../components/DashboardComp/FileComp/FileComp";
 
 const DashboardPage = () => {
   const [isCreateFolderModalOpen, setIsCreateFolderModalOpen] = useState(false);
   const [isCreateFileModalOpen, setIsCreateFileModalOpen] = useState(false);
+
+  const [showSubBar, setShowBar] = useState(true);
+  const { pathname } = useLocation();
 
   const { isLoggedIn, isLoading, userId } = useSelector(
     (state) => ({
@@ -41,6 +45,14 @@ const DashboardPage = () => {
     }
   }, [isLoading, userId, dispatch]);
 
+  useEffect(() => {
+    if (pathname.includes("/file/")) {
+      console.log("pathname", pathname);
+      setShowBar(false);
+    }
+    console.log("works");
+  }, [pathname]);
+
   return (
     <>
       {isCreateFolderModalOpen && (
@@ -51,13 +63,17 @@ const DashboardPage = () => {
         <CreateFile setIsCreateFileModalOpen={setIsCreateFileModalOpen} />
       )}
       <Nav />
-      <SubBar
-        setIsCreateFolderModalOpen={setIsCreateFolderModalOpen}
-        setIsCreateFileModalOpen={setIsCreateFileModalOpen}
-      />
+      {showSubBar && (
+        <SubBar
+          setIsCreateFolderModalOpen={setIsCreateFolderModalOpen}
+          setIsCreateFileModalOpen={setIsCreateFileModalOpen}
+        />
+      )}
+
       <Routes>
         <Route path="" element={<HomePageComp />} />
         <Route path="folder/:folderId" element={<FolderComp />} />
+        <Route path="file/:fileId" element={<FileComp />} />
       </Routes>
     </>
   );
