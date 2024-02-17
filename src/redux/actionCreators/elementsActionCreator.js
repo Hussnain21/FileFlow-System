@@ -23,6 +23,18 @@ const setChangeFolder = (payload) => ({
   payload,
 });
 
+// files creation
+
+const addFiles = (payload) => ({
+  type: types.ADD_FILES,
+  payload,
+});
+
+const addFile = (payload) => ({
+  type: types.CREATE_FILE,
+  payload,
+});
+
 export const createFolder = (data) => (dispatch) => {
   fb.firestore()
     .collection("folders")
@@ -47,11 +59,44 @@ export const getFolders = (userId) => (dispatch) => {
         docId: folder.id,
       }));
       dispatch(setLoading(false));
-      dispatch(addFolder(foldersData));
+      dispatch(addFolders(foldersData));
       console.log(foldersData);
     });
 };
 
 export const changeFolder = (folderId) => (dispatch) => {
   dispatch(setChangeFolder(folderId));
+};
+
+// file actions
+
+export const getFiles = (userId) => (dispatch) => {
+  fb.firestore()
+    .collection("files")
+    .where("userId", "==", userId)
+    .get()
+    .then(async (files) => {
+      const filesData = await files.docs.map((file) => ({
+        data: file.data(),
+        docId: file.id,
+      }));
+
+      dispatch(addFiles(filesData));
+    });
+};
+
+export const createFile = (data, setSuccess) => (dispatch) => {
+  fb.firestore()
+    .collection("files")
+    .add(data)
+    .then(async (file) => {
+      const fileData = await (await file.get()).data();
+      const fileId = file.id;
+      alert("File created successfully!");
+      dispatch(addFile({ data: fileData, docId: fileId }));
+      setSuccess(true);
+    })
+    .catch(() => {
+      setSuccess(false);
+    });
 };

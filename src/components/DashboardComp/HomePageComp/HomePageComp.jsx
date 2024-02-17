@@ -3,14 +3,15 @@ import Elements from "../Elements/Elements";
 import { useMemo } from "react";
 
 const HomePageComp = () => {
-  const folders = ["New folder", "new folder 2"];
-  const files = [{ name: "New file" }, { name: "new file 2" }];
-
-  const { isLoading, userFolders } = useSelector(
+  const { isLoading, userFolders, userFiles } = useSelector(
     (state) => ({
       isLoading: state.elements.isLoading,
-      userFolders: state.elements.userFolders[0]?.filter(
+      userFolders: state.elements.userFolders.filter(
         (folder) => folder.data && folder.data.parent === "root"
+      ),
+
+      userFiles: state.elements.userFiles.filter(
+        (file) => file.data.parent === "root"
       ),
     }),
     shallowEqual
@@ -29,7 +30,11 @@ const HomePageComp = () => {
             type={"folder"}
             elements={userFolders}
           />
-          <Elements title={"Created Files"} elements={files} />
+          <Elements
+            title={"Created Files"}
+            type={"file"}
+            elements={userFiles.filter((file) => file.data.url === null)}
+          />
         </>
       )}
     </div>
