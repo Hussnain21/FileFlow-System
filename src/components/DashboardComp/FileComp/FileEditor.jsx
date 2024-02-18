@@ -3,8 +3,8 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { duotoneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "./FileEditor.css";
 
-const FileEditor = ({ fileName }) => {
-  const [data, setData] = useState(`\n`);
+const FileEditor = ({ fileName, data, setData }) => {
+  // const [data, setData] = useState(`\n`);
 
   const codes = {
     html: "xml",
@@ -47,7 +47,7 @@ const FileEditor = ({ fileName }) => {
         <textarea
           className="code-input w-100"
           value={data}
-          onKeyDown={handleKeyDown}
+          // onKeyDown={handleKeyDown}
           onChange={(e) => setData(e.target.value)}
         />
         <pre className="code-output">

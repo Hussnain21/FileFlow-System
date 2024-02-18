@@ -35,6 +35,11 @@ const addFile = (payload) => ({
   payload,
 });
 
+const setFileData = (payload) => ({
+  type: types.SET_FILE_DATA,
+  payload,
+});
+
 export const createFolder = (data) => (dispatch) => {
   fb.firestore()
     .collection("folders")
@@ -98,5 +103,19 @@ export const createFile = (data, setSuccess) => (dispatch) => {
     })
     .catch(() => {
       setSuccess(false);
+    });
+};
+
+export const updateFileData = (fileId, data) => (dispatch) => {
+  fb.firestore()
+    .collection("files")
+    .doc(fileId)
+    .update({ data })
+    .then(() => {
+      dispatch(setFileData({ fileId, data }));
+      alert("File updated successfully");
+    })
+    .catch(() => {
+      alert("Something went wrong!");
     });
 };

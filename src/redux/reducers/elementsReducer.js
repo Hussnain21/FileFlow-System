@@ -44,6 +44,18 @@ const elementsReducer = (state = initialState, action) => {
         userFiles: [...state.userFiles, action.payload],
       };
 
+    case types.SET_FILE_DATA:
+      const { fileId, data } = action.payload;
+      const allFiles = state.userFiles;
+      const openedFile = allFiles.find((file) => file.docId === fileId);
+      openedFile.data.data = data;
+      return {
+        ...state,
+        userFiles: state.userFiles.map((file) =>
+          file.docId === fileId ? openedFile : file
+        ),
+      };
+
     default:
       return state;
   }
