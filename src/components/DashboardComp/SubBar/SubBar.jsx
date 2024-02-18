@@ -11,7 +11,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { changeFolder } from "../../../redux/actionCreators/elementsActionCreator";
 
-const SubBar = ({ setIsCreateFolderModalOpen, setIsCreateFileModalOpen }) => {
+const SubBar = ({
+  setIsCreateFolderModalOpen,
+  setIsCreateFileModalOpen,
+  setIsFileUploadModalOpen,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

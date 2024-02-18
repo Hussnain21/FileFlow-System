@@ -12,10 +12,12 @@ import {
 import FolderComp from "../../components/DashboardComp/FolderComp/FolderComp";
 import CreateFile from "../../components/DashboardComp/CreateFile/CreateFile";
 import FileComp from "../../components/DashboardComp/FileComp/FileComp";
+import UploadFile from "../../components/DashboardComp/UploadFile/UploadFile";
 
 const DashboardPage = () => {
   const [isCreateFolderModalOpen, setIsCreateFolderModalOpen] = useState(false);
   const [isCreateFileModalOpen, setIsCreateFileModalOpen] = useState(false);
+  const [isFileUploadModalOpen, setIsFileUploadModalOpen] = useState(false);
 
   const [showSubBar, setShowBar] = useState(true);
   const { pathname } = useLocation();
@@ -62,11 +64,15 @@ const DashboardPage = () => {
       {isCreateFileModalOpen && (
         <CreateFile setIsCreateFileModalOpen={setIsCreateFileModalOpen} />
       )}
+      {isFileUploadModalOpen && (
+        <UploadFile setIsFileUploadModalOpen={setIsFileUploadModalOpen} />
+      )}
       <Nav />
       {showSubBar && (
         <SubBar
           setIsCreateFolderModalOpen={setIsCreateFolderModalOpen}
           setIsCreateFileModalOpen={setIsCreateFileModalOpen}
+          setIsFileUploadModalOpen={setIsFileUploadModalOpen}
         />
       )}
 
