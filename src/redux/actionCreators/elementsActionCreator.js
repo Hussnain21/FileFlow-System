@@ -1,5 +1,6 @@
 import * as types from "../actions/elementsActions";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 import fb from "../..//config/firebase";
 
@@ -48,7 +49,7 @@ export const createFolder = (data) => (dispatch) => {
       const folderData = await (await folder.get()).data();
       const folderId = folder.id;
       dispatch(addFolder({ data: folderData, docId: folderId }));
-      alert("Folder created successfully");
+      toast.success("Folder created successfully");
     });
 };
 
@@ -97,7 +98,7 @@ export const createFile = (data, setSuccess) => (dispatch) => {
     .then(async (file) => {
       const fileData = await (await file.get()).data();
       const fileId = file.id;
-      alert("File created successfully!");
+      toast.success("File created successfully!");
       dispatch(addFile({ data: fileData, docId: fileId }));
       setSuccess(true);
     })
@@ -113,9 +114,42 @@ export const updateFileData = (fileId, data) => (dispatch) => {
     .update({ data })
     .then(() => {
       dispatch(setFileData({ fileId, data }));
-      alert("File updated successfully");
+      toast.success("File updated successfully");
     })
     .catch(() => {
-      alert("Something went wrong!");
+      toast.error("Something went wrong!");
     });
+};
+
+export const uploadFile = (file, data, setSuccess) => (dispatch) => {
+  const uploadFileRef = fb.storage().ref(`files/${data.userId}/${data.name}`);
+  uploadFileRef.put(file).on(
+    "state_changed",
+    (snapshot) => {
+      const progressBar = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
+      console.log("uploading" + progressBar + "%");
+    },
+    (error) => {
+      console.log(error);
+    },
+    async () => {
+      const fileUrl = await uploadFileRef.getDownloadURL();
+      const fullData = { ...data, url: fileUrl };
+      fb.firestore()
+        .collection("files")
+        .add(fullData)
+        .then(async (file) => {
+          const fileData = await (await file.get()).data();
+          const fileId = file.id;
+          dispatch(addFile({ data: fileData, docId: fileId }));
+          toast.error("Your file uploaded successfully!");
+          setSuccess(true);
+        })
+        .catch(() => {
+          setSuccess(false);
+        });
+    }
+  );
 };

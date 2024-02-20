@@ -9,7 +9,7 @@ const Nav = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
-      <Link className="navbar-brand ms-5" to="/dasboard">
+      <Link className="navbar-brand ms-5" to="/dashboard">
         FileFLow System
       </Link>
 

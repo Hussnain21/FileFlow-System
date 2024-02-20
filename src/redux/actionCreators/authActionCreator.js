@@ -1,5 +1,6 @@
 import * as types from "../actions/authActions";
 import fb from "../../config/firebase";
+import { toast } from "react-toastify";
 
 const loginUser = (payload) => {
   return {
@@ -28,7 +29,7 @@ export const signInUser = (email, password, setSuccess) => (dispatch) => {
       setSuccess(true);
     })
     .catch((error) => {
-      alert("Invalid Email or Password!");
+      toast.error("Invalid Email or Password!");
     });
 };
 
@@ -57,13 +58,13 @@ export const signUpUser = (name, email, password, setSuccess) => (dispatch) => {
     })
     .catch((error) => {
       if ((error.code = "auth/email-already-in-use")) {
-        alert("Email aleardy registered!");
+        toast.error("Email aleardy registered!");
       }
       if ((error.code = "auth/invalid-email")) {
-        alert("Email is invalid!");
+        toast.error("Email is invalid!");
       }
       if ((error.code = "auth/weak-password")) {
-        alert("Password is weak!");
+        toast.error("Password is weak!");
       }
     });
 };

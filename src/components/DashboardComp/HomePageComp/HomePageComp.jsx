@@ -35,6 +35,11 @@ const HomePageComp = () => {
             type={"file"}
             elements={userFiles.filter((file) => file.data.url === null)}
           />
+          <Elements
+            title={"Uploaded Files"}
+            type={"file"}
+            elements={userFiles.filter((file) => file.data.data === null)}
+          />
         </>
       )}
     </div>

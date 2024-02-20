@@ -30,6 +30,11 @@ const FolderComp = () => {
     shallowEqual
   );
 
+  const createFiles =
+    childFiles && childFiles.filter((file) => file.data.url === null);
+  const uploadedFiles =
+    childFiles && childFiles.filter((file) => file.data.data === null);
+
   console.log(folderId);
   // const a = currentFolderData[0]?.filter(
   //   (x) => x?.docId?.toString() === folderId.toString()
@@ -58,6 +63,13 @@ const FolderComp = () => {
               title={"Created Files"}
               type={"file"}
               elements={childFiles.filter((file) => file.data.url === null)}
+            />
+          )}
+          {childFiles.length > 0 && (
+            <Elements
+              title={"Uploaded Files"}
+              type={"file"}
+              elements={childFiles.filter((file) => file.data.data === null)}
             />
           )}
         </>

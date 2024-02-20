@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { React, useState } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { createFolder } from "../../../redux/actionCreators/elementsActionCreator";
+import { toast } from "react-toastify";
 
 const CreateFolder = ({ setIsCreateFolderModalOpen }) => {
   const [folderName, setFolderName] = useState("");
@@ -53,13 +54,13 @@ const CreateFolder = ({ setIsCreateFolderModalOpen }) => {
           };
           dispatch(createFolder(data));
         } else {
-          alert("Folder already exists!");
+          toast.error("Folder already exists!");
         }
       } else {
-        alert("Folder name must contain 3 or more characters!");
+        toast.error("Folder name must contain 3 or more characters!");
       }
     } else {
-      alert("Folder name required!");
+      toast.error("Folder name required!");
     }
   };
   return (

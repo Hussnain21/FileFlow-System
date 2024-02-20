@@ -8,7 +8,7 @@ const Header = ({ fileName, fileId, fileData, prevFileData }) => {
   const navigate = useNavigate();
   const disptach = useDispatch();
   return (
-    <nav className="navbar navbar-expand-lg mt-1 navbar-light bg-white shadow-sm">
+    <nav className="navbar navbar-expand-lg mt-2 navbar-light bg-white shadow-sm">
       <p className="navba-brand my-0 fw-bold ms-5 ">{fileName}</p>
       {fileData !== prevFileData && (
         <h5 className="my-o fw-bold ms-2 text-primary">*[modified]</h5>
@@ -27,7 +27,7 @@ const Header = ({ fileName, fileId, fileData, prevFileData }) => {
           </button>
         </li>
         <li className="nav-item mx-2">
-          <button className="btn btn-dark" onClick={() => navigate(-1)}>
+          <button className="btn btn-dark" onClick={() => navigate("/")}>
             <FontAwesomeIcon icon={faAngleLeft} /> Go Back
           </button>
         </li>
