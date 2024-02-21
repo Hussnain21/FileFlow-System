@@ -1,9 +1,14 @@
 import Header from "./Header";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { shallowEqual, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import FileEditor from "./FileEditor";
 import { useState, useEffect } from "react";
+
+import {
+  updateFileData,
+  deleteFile,
+} from "../../../redux/actionCreators/elementsActionCreator";
 
 const FileComp = () => {
   const { fileId } = useParams();
@@ -11,6 +16,7 @@ const FileComp = () => {
   const [prevFileData, setPrevFileData] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { openedFile, isAuthenticated } = useSelector(
     (state) => ({
@@ -46,6 +52,15 @@ const FileComp = () => {
     document.body.removeChild(bit);
 
     console.log(bit);
+  };
+
+  const handleDelete = () => {
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this file?"
+    );
+    if (shouldDelete) {
+      dispatch(deleteFile(fileId));
+    }
   };
 
   if (isAuthenticated)
@@ -88,6 +103,12 @@ const FileComp = () => {
                   onClick={() => downloadFile()}
                 >
                   Download
+                </button>
+                <button
+                  className="btn btn-sm btn-primary"
+                  onClick={() => handleDelete()}
+                >
+                  Delete
                 </button>
               </div>
             </div>
