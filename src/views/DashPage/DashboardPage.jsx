@@ -51,6 +51,8 @@ const DashboardPage = () => {
     if (pathname.includes("/file/")) {
       console.log("pathname", pathname);
       setShowBar(false);
+    } else {
+      setShowBar(true);
     }
     console.log("works");
   }, [pathname]);

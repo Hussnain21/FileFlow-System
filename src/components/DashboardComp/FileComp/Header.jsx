@@ -44,6 +44,7 @@ const Header = ({ fileName, fileId, fileData, prevFileData }) => {
     );
     if (shouldDelete) {
       dispatch(deleteFile(fileId));
+      navigate("/dashboard");
     }
   };
 
@@ -67,7 +68,10 @@ const Header = ({ fileName, fileId, fileData, prevFileData }) => {
           </button>
         </li>
         <li className="nav-item mx-2">
-          <button className="btn btn-dark" onClick={() => navigate("/")}>
+          <button
+            className="btn btn-dark"
+            onClick={() => navigate("/dashboard")}
+          >
             <FontAwesomeIcon icon={faAngleLeft} /> Go Back
           </button>
         </li>

@@ -60,6 +60,7 @@ const FileComp = () => {
     );
     if (shouldDelete) {
       dispatch(deleteFile(fileId));
+      navigate("/dashboard");
     }
   };
 
@@ -93,13 +94,13 @@ const FileComp = () => {
               <div className="d-flex align-items-center text-white me-5">
                 <button
                   className="btn btn-sm btn-outline-light me-2"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate("/dashboard")}
                 >
                   {" "}
                   Go back
                 </button>
                 <button
-                  className="btn btn-sm btn-primary"
+                  className="btn btn-sm btn-primary me-2"
                   onClick={() => downloadFile()}
                 >
                   Download
