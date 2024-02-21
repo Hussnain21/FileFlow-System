@@ -41,6 +41,11 @@ const setFileData = (payload) => ({
   payload,
 });
 
+const deleteFileAction = (payload) => ({
+  type: types.DELETE_FILE,
+  payload,
+});
+
 export const createFolder = (data) => (dispatch) => {
   fb.firestore()
     .collection("folders")
@@ -152,4 +157,18 @@ export const uploadFile = (file, data, setSuccess) => (dispatch) => {
         });
     }
   );
+};
+
+export const deleteFile = (fileId) => (dispatch) => {
+  fb.firestore()
+    .collection("files")
+    .doc(fileId)
+    .delete()
+    .then(() => {
+      dispatch(deleteFileAction({ fileId }));
+      toast.success("File deleted successfully");
+    })
+    .catch(() => {
+      toast.error("Something went wrong while deleting the file");
+    });
 };

@@ -2,11 +2,14 @@ import { faAngleLeft, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateFileData } from "../../../redux/actionCreators/elementsActionCreator";
+import {
+  updateFileData,
+  deleteFile,
+} from "../../../redux/actionCreators/elementsActionCreator";
 
 const Header = ({ fileName, fileId, fileData, prevFileData }) => {
   const navigate = useNavigate();
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
 
   const { openedFile, isAuthenticated } = useSelector(
     (state) => ({
@@ -19,16 +22,29 @@ const Header = ({ fileName, fileId, fileData, prevFileData }) => {
   );
 
   const downloadFile = () => {
-    const bit = document.createElement("a");
-    bit.setAttribute("href", openedFile.data.data);
-    bit.setAttribute("download", openedFile.data.name);
-    bit.setAttribute("target", "_blank");
-    bit.style.display = "none";
-    document.body.appendChild(bit);
-    bit.click();
-    document.body.removeChild(bit);
+    // Create a Blob object with the file data
+    const fileDataBlob = new Blob([openedFile.data.data], {
+      type: "application/octet-stream",
+    });
 
-    console.log(bit);
+    // Create a download link
+    const downloadLink = document.createElement("a");
+    downloadLink.href = window.URL.createObjectURL(fileDataBlob);
+    downloadLink.download = openedFile.data.name;
+
+    // Append the link to the body, trigger the click event, and remove the link
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
+  const handleDelete = () => {
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this file?"
+    );
+    if (shouldDelete) {
+      dispatch(deleteFile(fileId));
+    }
   };
 
   return (
@@ -44,7 +60,7 @@ const Header = ({ fileName, fileId, fileData, prevFileData }) => {
             className="btn btn-dark"
             disabled={fileData === prevFileData}
             onClick={() => {
-              disptach(updateFileData(fileId, fileData));
+              dispatch(updateFileData(fileId, fileData));
             }}
           >
             <FontAwesomeIcon icon={faSave} /> Save
@@ -58,6 +74,11 @@ const Header = ({ fileName, fileId, fileData, prevFileData }) => {
         <li className="nav-item mx-2">
           <button className="btn btn-dark" onClick={() => downloadFile()}>
             <FontAwesomeIcon icon={faAngleLeft} /> Download
+          </button>
+        </li>
+        <li className="nav-item mx-2">
+          <button className="btn btn-dark" onClick={handleDelete}>
+            <FontAwesomeIcon icon={faAngleLeft} /> Delete
           </button>
         </li>
       </ul>

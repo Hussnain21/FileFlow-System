@@ -56,6 +56,15 @@ const elementsReducer = (state = initialState, action) => {
         ),
       };
 
+    case types.DELETE_FILE:
+      const fileIdToDelete = action.payload.fileId;
+      return {
+        ...state,
+        userFiles: state.userFiles.filter(
+          (file) => file.docId !== fileIdToDelete
+        ),
+      };
+
     default:
       return state;
   }
