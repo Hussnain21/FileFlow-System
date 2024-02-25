@@ -9,10 +9,7 @@ const Nav = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Dispatch the logout action
     dispatch(SignOutUser());
-
-    // Redirect to the homepage
     navigate("/");
   };
   return (

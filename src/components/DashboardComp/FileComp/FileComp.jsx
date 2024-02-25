@@ -94,7 +94,7 @@ const FileComp = () => {
               <div className="d-flex align-items-center text-white me-5">
                 <button
                   className="btn btn-sm btn-outline-light me-2"
-                  onClick={() => navigate("/dashboard")}
+                  onClick={() => navigate(-1)}
                 >
                   {" "}
                   Go back
