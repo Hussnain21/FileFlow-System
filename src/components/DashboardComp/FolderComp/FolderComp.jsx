@@ -49,7 +49,7 @@ const FolderComp = () => {
     <div>
       {/* FolderComp: {folderId} {JSON.stringify(a)} */}
       {/* childFolders: {JSON.stringify(childFolders)} */}
-      {childFolders.length > 0 ? (
+      {childFiles.length > 0 || childFolders.length > 0 ? (
         <>
           {childFolders.length > 0 && (
             <Elements

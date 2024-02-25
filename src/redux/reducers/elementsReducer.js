@@ -7,6 +7,37 @@ const initialState = {
   userFiles: [],
   adminFolders: [],
   adminFiles: [],
+  folders: [],
+};
+
+const deleteFolderRecursively = (allFolders, folderIdToDelete) => {
+  const updatedFolders = [];
+  for (const folder of allFolders) {
+    if (folder.docId === folderIdToDelete) {
+      continue;
+    }
+
+    if (folder.data.parentId === folderIdToDelete) {
+      continue;
+    }
+
+    if (folder.data.parentId && folder.data.parentId === folderIdToDelete) {
+      const updatedSubfolder = {
+        ...folder,
+        data: {
+          ...folder.data,
+          parentId: null,
+        },
+      };
+      updatedFolders.push(
+        updatedSubfolder,
+        ...deleteFolderRecursively(allFolders, folder.docId)
+      );
+    } else {
+      updatedFolders.push(folder);
+    }
+  }
+  return updatedFolders;
 };
 
 const elementsReducer = (state = initialState, action) => {
@@ -63,6 +94,18 @@ const elementsReducer = (state = initialState, action) => {
         userFiles: state.userFiles.filter(
           (file) => file.docId !== fileIdToDelete
         ),
+      };
+
+    case types.DELETE_FOLDER:
+      const folderIdToDelete = action.payload.folderId;
+      const updatedUserFolders = deleteFolderRecursively(
+        state.userFolders,
+        folderIdToDelete
+      );
+
+      return {
+        ...state,
+        userFolders: updatedUserFolders,
       };
 
     default:

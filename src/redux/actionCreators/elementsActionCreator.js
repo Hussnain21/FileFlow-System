@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 import fb from "../..//config/firebase";
+import { saveAs } from "file-saver";
 
 const addFolder = (payload) => ({
   type: types.CREATE_FOLDER,
@@ -44,6 +45,13 @@ const setFileData = (payload) => ({
 const deleteFileAction = (payload) => ({
   type: types.DELETE_FILE,
   payload,
+});
+
+export const deleteFolderAction = (folderId) => ({
+  type: types.DELETE_FOLDER,
+  payload: {
+    folderId: folderId,
+  },
 });
 
 export const createFolder = (data) => (dispatch) => {
@@ -149,7 +157,7 @@ export const uploadFile = (file, data, setSuccess) => (dispatch) => {
           const fileData = await (await file.get()).data();
           const fileId = file.id;
           dispatch(addFile({ data: fileData, docId: fileId }));
-          toast.error("Your file uploaded successfully!");
+          toast.success("Your file uploaded successfully!");
           setSuccess(true);
         })
         .catch(() => {
@@ -170,5 +178,37 @@ export const deleteFile = (fileId) => (dispatch) => {
     })
     .catch(() => {
       toast.error("Something went wrong while deleting the file");
+    });
+};
+
+// Function to download a single file
+const downloadFile = async (fileData) => {
+  const fileRef = fb.storage().ref(fileData.url);
+  const fileBlob = await fileRef.getDownloadURL();
+  saveAs(fileBlob, fileData.name);
+};
+
+const downloadFolder = async (folder) => {
+  for (const file of folder.userFiles) {
+    await downloadFile(file.data);
+  }
+
+  for (const subfolder of folder.userFolders) {
+    await downloadFolder(subfolder);
+  }
+};
+
+export const deleteFolder = (folderId) => (dispatch) => {
+  fb.firestore()
+    .collection("folders")
+    .doc(folderId)
+    .delete()
+    .then(() => {
+      dispatch(deleteFolderAction(folderId));
+      toast.success("Folder deleted successfully");
+    })
+    .catch((error) => {
+      console.error("Error deleting folder:", error);
+      toast.error("Failed to delete folder");
     });
 };

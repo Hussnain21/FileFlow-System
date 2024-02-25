@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { SignOutUser } from "../../../redux/actionCreators/authActionCreator";
@@ -6,7 +6,15 @@ import { SignOutUser } from "../../../redux/actionCreators/authActionCreator";
 const Nav = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    // Dispatch the logout action
+    dispatch(SignOutUser());
+
+    // Redirect to the homepage
+    navigate("/");
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
       <Link className="navbar-brand ms-5" to="/dashboard">
@@ -28,10 +36,7 @@ const Nav = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <button
-                className="btn btn-dark"
-                onClick={() => dispatch(SignOutUser())}
-              >
+              <button className="btn btn-dark" onClick={handleLogout}>
                 Logout
               </button>
             </li>
