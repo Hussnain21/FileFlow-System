@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import FileEditor from "./FileEditor";
 import { useState, useEffect } from "react";
-
+import "./file.css";
 import {
   updateFileData,
   deleteFile,
@@ -113,7 +113,10 @@ const FileComp = () => {
                 </button>
               </div>
             </div>
-            <div className="w-100 mt-4" style={{ height: "650px" }}>
+            <div
+              className="d-flex align-item-center justify-content-center"
+              style={{ height: "650px", overflow: " auto" }}
+            >
               {openedFile?.data?.extension.includes("png") ||
               openedFile?.data?.extension.includes("jpg") ||
               openedFile?.data?.extension.includes("jpeg") ||
@@ -122,7 +125,7 @@ const FileComp = () => {
                 <img
                   src={openedFile?.data?.url}
                   alt={openedFile?.data?.name}
-                  className="w-100 h-100 img-fluid"
+                  className="responsive-img"
                 />
               ) : (
                 <div className="w-100 h-100 d-flex justify-content-center align-items-center">

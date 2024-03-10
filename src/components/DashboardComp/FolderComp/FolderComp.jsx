@@ -17,15 +17,6 @@ const FolderComp = () => {
       childFiles: state.elements.userFiles.filter(
         (file) => file.data.parent === folderId
       ),
-      // childFolders: Array.isArray(state.elements.userFolders?.[0])
-      //   ? state.elements.userFolders[0].filter(
-      //       (folder) => folder.data && folder.data.parent === folderId
-      //     )
-      //   : [],
-
-      // childFolders: state.elements.userFolders[0]?.filter(
-      //   (folder) => folder.data && folder.data.parent === folderId
-      // ),
     }),
     shallowEqual
   );
@@ -36,14 +27,6 @@ const FolderComp = () => {
     childFiles && childFiles.filter((file) => file.data.data === null);
 
   console.log(folderId);
-  // const a = currentFolderData[0]?.filter(
-  //   (x) => x?.docId?.toString() === folderId.toString()
-  // )[0];
-  // console.log(a);
-  // console.log(currentFolderData);
-
-  // const folderDataExists = a !== undefined;
-  // const folderData = folderDataExists ? a.data : null;
 
   return (
     <div>
