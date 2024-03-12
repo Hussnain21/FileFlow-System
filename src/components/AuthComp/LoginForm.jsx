@@ -1,8 +1,9 @@
 import React from "react";
 import { signInUser } from "../../redux/actionCreators/authActionCreator";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "./Login.css";
 
 const LoginForm = () => {
   const [email, setEmail] = React.useState("");
@@ -29,7 +30,7 @@ const LoginForm = () => {
   }, [success]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="login-form">
       <div className="form-group my-2">
         <input
           type="email"
@@ -53,6 +54,9 @@ const LoginForm = () => {
       <button className="submit btn btn-primary my-2 form-control">
         login
       </button>
+      <Link to="/register" className="ms-auto" style={{}}>
+        Not a member? Register
+      </Link>
     </form>
   );
 };

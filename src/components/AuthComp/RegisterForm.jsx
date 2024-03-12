@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { signUpUser } from "../../redux/actionCreators/authActionCreator";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "./Register.css";
 
 const RegisterForm = () => {
   const [name, setName] = React.useState("");
@@ -34,7 +35,7 @@ const RegisterForm = () => {
   }, [success]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="register-form">
       <div className="form-group my-2">
         <input
           type="text"
@@ -78,6 +79,9 @@ const RegisterForm = () => {
       <button className="submit btn btn-primary my-2 form-control">
         Register
       </button>
+      <Link to="/login" className="ms-auto">
+        Already a member? Login
+      </Link>
     </form>
   );
 };

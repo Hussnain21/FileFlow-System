@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { NavComponent } from "../../../components/HomePageComp";
 
 import RegisterForm from "../../../components/AuthComp/RegisterForm";
+import Footer from "../../../components/HomePageComp/FooterComp";
 
 const Register = () => {
   return (
@@ -13,11 +14,18 @@ const Register = () => {
         <div className="row">
           <div className="col-md-5 mx-auto mt-5">
             <RegisterForm />
-            <Link to="/login" className="ms-auto">
-              Already a member? Login
-            </Link>
           </div>
         </div>
+      </div>
+      <div
+        className="footer"
+        style={{
+          marginTop: "165px",
+          borderTop: "1px solid #ccc",
+          textAlign: "center",
+        }}
+      >
+        <Footer />
       </div>
     </>
   );

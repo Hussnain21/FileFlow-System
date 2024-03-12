@@ -1,0 +1,47 @@
+.mine {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #f0f0f0; */
+  margin-top: -50px;
+}
+
+.hero {
+  height: 80vh;
+  background-image: url("/public/back.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  padding: 100px;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.btn1 {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 30px;
+  }
+}

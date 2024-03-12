@@ -1,6 +1,7 @@
 import { shallowEqual, useSelector } from "react-redux";
 import Elements from "../Elements/Elements";
 import { useMemo } from "react";
+import Footer from "../../HomePageComp/FooterComp";
 
 const HomePageComp = () => {
   const { isLoading, userFolders, userFiles } = useSelector(
@@ -40,6 +41,7 @@ const HomePageComp = () => {
             type={"file"}
             elements={userFiles.filter((file) => file.data.data === null)}
           />
+          <Footer />
         </>
       )}
     </div>

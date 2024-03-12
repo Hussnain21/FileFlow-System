@@ -188,6 +188,7 @@ import {
   deleteFolder,
 } from "../../../redux/actionCreators/elementsActionCreator";
 import JSZip from "jszip";
+import Footer from "../../HomePageComp/FooterComp";
 
 const Elements = ({ title, elements, type }) => {
   const navigate = useNavigate();
@@ -354,7 +355,7 @@ const Elements = ({ title, elements, type }) => {
                   icon={faFolder}
                   size="3x"
                   className="mb-2"
-                  style={{ color: "#3498db" }}
+                  style={{ color: "#FED55F", cursor: "pointer" }}
                 />
                 <div className="position-absolute top-0 end-0">
                   <ButtonGroup>
@@ -392,7 +393,7 @@ const Elements = ({ title, elements, type }) => {
                 icon={faFileAlt}
                 size="3x"
                 className="mb-2"
-                style={{ color: "#2ecc71" }}
+                style={{ color: "#2ecc71", cursor: "pointer" }}
               />
             )}
             {item.data && item.data.name ? item.data.name : "No Name"}
