@@ -22,7 +22,7 @@ const Login = () => {
       <div
         className="footer"
         style={{
-          marginTop: "220px",
+          marginTop: "258px",
           borderTop: "1px solid #ccc",
           textAlign: "center",
         }}

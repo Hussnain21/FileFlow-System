@@ -81,7 +81,7 @@ const SubBar = ({
             className="btn btn-outline-dark"
             onClick={() => setIsFileUploadModalOpen(true)}
           >
-            <FontAwesomeIcon icon={faFileUpload} /> &nbsp; Upload File
+            <FontAwesomeIcon icon={faFileUpload} /> &nbsp; Upload File/Folders
           </button>
         </li>
         <li className="nav-item mx-2">

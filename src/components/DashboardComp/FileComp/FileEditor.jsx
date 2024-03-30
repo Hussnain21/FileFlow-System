@@ -23,7 +23,7 @@ const FileEditor = ({ fileName, data, setData }) => {
   };
 
   const handleKeyDown = (evt) => {
-    let value = content,
+    let value = data,
       selStartPos = evt.currentTarget.selectionStart;
 
     console.log(evt.currentTarget);
@@ -47,20 +47,23 @@ const FileEditor = ({ fileName, data, setData }) => {
         <textarea
           className="code-input w-100 h-100"
           value={data}
-          // onKeyDown={handleKeyDown}
+          onKeyDown={handleKeyDown}
           onChange={(e) => setData(e.target.value)}
         />
-        <pre className="code-output">
-          <SyntaxHighlighter
-            language={codes[fileName.split(".")[1]]}
-            showLineNumbers
-            style={duotoneLight}
-            wrapLines
-            startingLineNumber={1}
-          >
-            {data}
-          </SyntaxHighlighter>
-        </pre>
+        <div className="code-container">
+          {" "}
+          <pre className="code-output">
+            <SyntaxHighlighter
+              language={codes[fileName.split(".")[1]]}
+              showLineNumbers
+              style={duotoneLight}
+              wrapLines
+              startingLineNumber={1}
+            >
+              {data}
+            </SyntaxHighlighter>
+          </pre>{" "}
+        </div>
       </div>
     </div>
   );
