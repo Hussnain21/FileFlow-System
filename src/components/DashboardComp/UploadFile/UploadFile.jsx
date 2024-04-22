@@ -80,7 +80,7 @@ const UploadFile = ({ setIsFileUploadModalOpen }) => {
       <div className="row align-items-center justify-content-center">
         <div className="col-md-4 mt-5 bg-white rounded p-4">
           <div className="d-flex justify-content-between">
-            <h4>Upload File</h4>
+            <h4>Upload Files/Folders</h4>
             <button
               className="btn"
               onClick={() => setIsFileUploadModalOpen(false)}
@@ -107,7 +107,7 @@ const UploadFile = ({ setIsFileUploadModalOpen }) => {
                 type="submit"
                 className="btn btn-primary mt-5 form-control"
               >
-                Upload File
+                Upload Files/Folders
               </button>
             </form>
           </div>

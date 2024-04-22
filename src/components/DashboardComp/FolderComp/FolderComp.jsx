@@ -1,6 +1,7 @@
 import { shallowEqual, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Elements from "../Elements/Elements";
+import Footer from "../../HomePageComp/FooterComp";
 
 const FolderComp = () => {
   const { folderId } = useParams();
