@@ -42,7 +42,9 @@ const Footer = () => {
               Dashboard
             </Link>
           ) : (
-            <a href="/login">Login</a> | <a href="/register">Register</a>
+            <>
+              <a href="/login">Login</a> | <a href="/register">Register</a>
+            </>
           )}
         </p>
       </div>

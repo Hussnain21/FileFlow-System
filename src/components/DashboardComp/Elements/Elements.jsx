@@ -33,7 +33,7 @@ const Elements = ({ title, elements, type }) => {
   const downloadFolder = (folderName, folderContents, folderId) => {
     const zip = new JSZip();
 
-    const processFolder = (currentFolder, currentPath) => {
+    const processFolder = (currentFolder) => {
       if (Array.isArray(currentFolder)) {
         currentFolder.forEach((fileOrFolder) => {
           const targetFiles = childFiles.filter(
@@ -166,79 +166,6 @@ const Elements = ({ title, elements, type }) => {
         ))}
       </div>
     </div>
-
-    // <div className="w-100">
-    //   <div className="ms-4 mt-0">
-    //     <div className="col-md-2 mt-0 mb-0 px-0">
-    //       <input
-    //         type="text"
-    //         placeholder="Search..."
-    //         value={searchTerm}
-    //         onChange={(e) => setSearchTerm(e.target.value)}
-    //         className="form-control shadow-sm rounded-2"
-    //         style={{ border: " 1px solid #ced4da" }}
-    //       />
-    //     </div>
-    //   </div>
-    //   <h4 className="text-center border-bottom py-2">{title}</h4>
-    //   <div className="row gap-2 p-4 flex-wrap">
-    //     {filteredElements.map((item, index) => (
-    //       <div
-    //         key={index * 55}
-    //         className="col-md-2 p-3 text-center d-flex flex-column border position-relative"
-    //       >
-    //         {type === "folder" ? (
-    //           <>
-    //             <FontAwesomeIcon
-    //               icon={faFolder}
-    //               size="3x"
-    //               className="mb-2"
-    //               style={{ color: "#3498db" }}
-    //             />
-    //             <div className="position-absolute top-0 end-0">
-    //               <ButtonGroup>
-    //                 <Dropdown as={ButtonGroup}>
-    //                   <Dropdown.Toggle
-    //                     variant="link"
-    //                     id={`dropdown-split-basic-${index}`}
-    //                     style={{
-    //                       fontSize: "18px",
-    //                       color: "#000",
-    //                       padding: "0",
-    //                     }}
-    //                   >
-    //                     <FontAwesomeIcon icon={faEllipsisV} />
-    //                   </Dropdown.Toggle>
-
-    //                   <Dropdown.Menu>
-    //                     <Dropdown.Item
-    //                       onClick={() => downloadFolder(item.data.name)}
-    //                     >
-    //                       Download
-    //                     </Dropdown.Item>
-    //                     <Dropdown.Item
-    //                       onClick={() => handleDeleteFolder(item.docId)}
-    //                     >
-    //                       Delete
-    //                     </Dropdown.Item>
-    //                   </Dropdown.Menu>
-    //                 </Dropdown>
-    //               </ButtonGroup>
-    //             </div>
-    //           </>
-    //         ) : (
-    //           <FontAwesomeIcon
-    //             icon={faFileAlt}
-    //             size="3x"
-    //             className="mb-2"
-    //             style={{ color: "#2ecc71" }}
-    //           />
-    //         )}
-    //         {item.data && item.data.name ? item.data.name : "No Name"}
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
   );
 };
 

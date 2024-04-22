@@ -130,12 +130,3 @@ const CreateFile = ({ setIsCreateFileModalOpen }) => {
 };
 
 export default CreateFile;
-
-//   const firstFolderArray = userFolders[0];
-//   const folderExists = firstFolderArray
-//     ?.filter(
-//       (folder) => folder?.parent?.toLowerCase() == currentFolder.toLowerCase()
-//     )
-//     .find((folder) => folder?.name?.toLowerCase() == name?.toLowerCase());
-//   return folderExists;
-// };

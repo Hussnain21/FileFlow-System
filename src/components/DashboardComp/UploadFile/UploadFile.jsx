@@ -118,12 +118,3 @@ const UploadFile = ({ setIsFileUploadModalOpen }) => {
 };
 
 export default UploadFile;
-
-//   const firstFolderArray = userFolders[0];
-//   const folderExists = firstFolderArray
-//     ?.filter(
-//       (folder) => folder?.parent?.toLowerCase() == currentFolder.toLowerCase()
-//     )
-//     .find((folder) => folder?.name?.toLowerCase() == name?.toLowerCase());
-//   return folderExists;
-// };
